@@ -1,5 +1,6 @@
 #![allow(dead_code)]
 #![allow(unused_variables)]
+#![allow(unused_imports)]
 
 use clap::{App, Arg};
 use reqwest::header::{HeaderMap, HeaderValue, AUTHORIZATION};
