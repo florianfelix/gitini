@@ -1,5 +1,5 @@
 # gitify
-
+not yet working state
 ## Install
 - have rust installed
 - `cargo install --locked --git https://github.com/florianfelix/gitify`
