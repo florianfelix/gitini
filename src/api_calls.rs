@@ -46,9 +46,16 @@ pub async fn create_repo(
         println!("SUCCESS. Repository created");
         let ssh_url: String = content["ssh_url"].as_str().unwrap().into();
         let newrepo: CreatedRepo = CreatedRepo::new().set_ssh_url(ssh_url);
+
+        newrepo.check_gitignore(settings.working_dir.clone());
+        newrepo.check_readme(settings.working_dir.clone());
+
         if settings.complete {
             newrepo.push_all();
+            return Ok(())
         }
+        
+        newrepo.base_case();
     }
 
     Ok(())
