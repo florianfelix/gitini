@@ -47,7 +47,7 @@ async fn execute(
 
 fn main() {
     let working_dir = std::env::current_dir().unwrap();
-    println!("Working dir:\n{:?}", &working_dir);
+    // println!("Working dir:\n{:?}", &working_dir);
 
     let confname = "gitify.conf";
     let mut config: GitifyConfig = confy::load(confname).unwrap();
@@ -99,7 +99,7 @@ fn main() {
         settings.private = false;
     }
 
-    println!("{:?}", &config);
-    println!("{:?}", &settings);
+    // println!("{:?}", &config);
+    // println!("{:?}", &settings);
     execute(config, settings).unwrap();
 }
