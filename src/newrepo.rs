@@ -1,3 +1,4 @@
+use std::process::Command;
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -44,5 +45,51 @@ impl NewRepoComplete {
             has_downloads: true,
             is_template: false,
         }
+    }
+}
+
+#[derive(Debug)]
+pub struct CreatedRepo {
+    pub ssh_url: String,
+}
+
+impl CreatedRepo {
+    pub fn new() -> Self {
+        Self { ssh_url: "".into() }
+    }
+    pub fn set_ssh_url(mut self, ssh_url: String) -> Self {
+        self.ssh_url = ssh_url;
+        self
+    }
+    pub fn push_all(&self) {
+        Command::new("git")
+            .arg("init")
+            .output()
+            .expect("failed to init git");
+        Command::new("git")
+            .arg("add")
+            .arg(".")
+            .output()
+            .expect("failed to stage all files");
+        Command::new("git")
+            .arg("commit")
+            .arg("-m")
+            .arg("init")
+            .output()
+            .expect("failed to commit staged files");
+        Command::new("git")
+            .arg("remote")
+            .arg("add")
+            .arg("origin")
+            .arg(&self.ssh_url)
+            .output()
+            .expect("failed to set remote");
+        Command::new("git")
+            .arg("push")
+            .arg("--set-upstream")
+            .arg("origin")
+            .arg("main")
+            .output()
+            .expect("failed to push to github");
     }
 }
