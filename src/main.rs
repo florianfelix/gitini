@@ -6,10 +6,12 @@ use clap::{App, Arg};
 use reqwest::header::{HeaderMap, HeaderValue, AUTHORIZATION};
 
 mod api_calls;
+mod create_settings;
 mod gconfig;
 mod newrepo;
 mod utils;
 use api_calls::{create_repo, getgit};
+use create_settings::CreateSettings;
 use gconfig::GitifyConfig;
 
 #[tokio::main]
