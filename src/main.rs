@@ -34,7 +34,7 @@ async fn execute(config: GitifyConfig) -> Result<(), Box<dyn std::error::Error>>
     // let base = "https://api.github.com/users/florianfelix/repos".to_string();
     let zen = "https://api.github.com/zen".to_string();
 
-    getgit(&mut client, repos).await?;
+    // getgit(&mut client, repos).await?;
     getgit(&mut client, zen).await?;
 
     Ok(())
@@ -79,6 +79,9 @@ fn main() {
         );
         return;
     }
+
+    let working_dir = std::env::current_dir().unwrap();
+    println!("{:?}", &working_dir);
 
     execute(config).unwrap();
 }
