@@ -33,7 +33,7 @@ async fn execute(
         .default_headers(headers)
         .build()?;
 
-    // create_repo(&mut client).await?;
+    create_repo(&mut client, settings).await?;
 
     let repos = "https://api.github.com/user/repos".to_string();
     // let base = "https://api.github.com/users/florianfelix/repos".to_string();
