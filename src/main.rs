@@ -43,11 +43,22 @@ async fn execute(
 }
 
 fn main() {
-    let working_dir = std::env::current_dir().unwrap();
+    // Settings for this run
+    let working_dir = std::env::current_dir().ok();
+    let repo_name = working_dir
+        .as_ref()
+        .and_then(|p| p.file_name())
+        .and_then(|s| s.to_str())
+        .map(String::from)
+        .unwrap(); // Is this truly the best way?
+
+    let mut settings = CreateSettings::new(working_dir.unwrap(), repo_name, true);
+
+    // Load - Create Config
     let confname = "gitify";
     let mut config: GitifyConfig = confy::load(confname).unwrap();
-    let mut settings = CreateSettings::new(working_dir, true);
 
+    // ARGUMENTS
     let matches = App::new("Gitify")
         .version("0.1")
         .author("Florian Felix M. <florianfelixmeyer@gmail.com>")
@@ -68,6 +79,7 @@ fn main() {
         )
         .get_matches();
 
+    // TEST ARGUMENTS
     // Store Token in config
     if let Some(t) = matches.value_of("token") {
         config.api_key = t.to_string();
