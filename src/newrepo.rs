@@ -23,12 +23,12 @@ pub struct NewRepoComplete {
 }
 
 impl NewRepoComplete {
-    pub fn new(name: &str) -> Self {
+    pub fn new(name: &str, private: bool) -> Self {
         Self {
             name: name.to_string(),
             description: "String".to_string(),
             homepage: "String".to_string(),
-            private: true,
+            private: private,
             has_issues: true,
             has_projects: true,
             has_wiki: true,

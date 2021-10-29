@@ -1,5 +1,6 @@
 use std::path::PathBuf;
 
+#[derive(Debug)]
 pub struct CreateSettings {
     pub working_dir: PathBuf,
     pub private: bool,

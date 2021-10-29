@@ -51,8 +51,6 @@ fn main() {
 
     let confname = "gitify.conf";
     let mut config: GitifyConfig = confy::load(confname).unwrap();
-    println!("{:?}", &config);
-
     let mut settings = CreateSettings::new(working_dir, true);
 
     let matches = App::new("Gitify")
@@ -101,5 +99,7 @@ fn main() {
         settings.private = false;
     }
 
+    println!("{:?}", &config);
+    println!("{:?}", &settings);
     execute(config, settings).unwrap();
 }
