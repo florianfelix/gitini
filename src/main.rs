@@ -35,12 +35,12 @@ async fn execute(
 
     create_repo(&mut client, settings).await?;
 
-    let repos = "https://api.github.com/user/repos".to_string();
+    // let repos = "https://api.github.com/user/repos".to_string();
     // let base = "https://api.github.com/users/florianfelix/repos".to_string();
-    let zen = "https://api.github.com/zen".to_string();
+    // let zen = "https://api.github.com/zen".to_string();
 
     // getgit(&mut client, repos).await?;
-    getgit(&mut client, zen).await?;
+    // getgit(&mut client, zen).await?;
 
     Ok(())
 }
