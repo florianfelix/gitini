@@ -5,6 +5,7 @@ pub struct CreateSettings {
     pub working_dir: PathBuf,
     pub repo_name: String,
     pub private: bool,
+    pub complete: bool,
 }
 
 impl CreateSettings {
@@ -12,7 +13,8 @@ impl CreateSettings {
         Self {
             working_dir: working_dir,
             repo_name: repo_name,
-            private: private
+            private: private,
+            complete: false,
         }
     }
 }

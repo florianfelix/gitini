@@ -77,6 +77,12 @@ fn main() {
                 .long("public")
                 .about("Create a public repository"),
         )
+        .arg(
+            Arg::new("complete")
+                .short('c')
+                .long("complete")
+                .about("init, commit and push everything"),
+        )
         .get_matches();
 
     // TEST ARGUMENTS
@@ -106,6 +112,9 @@ fn main() {
     // Settings: set public
     if matches.is_present("public") {
         settings.private = false;
+    }
+    if matches.is_present("complete") {
+        settings.complete = true;
     }
 
     // DoIt
