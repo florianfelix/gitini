@@ -19,8 +19,11 @@ async fn execute(
     config: GitifyConfig,
     settings: CreateSettings,
 ) -> Result<(), Box<dyn std::error::Error>> {
-    let mut headers = HeaderMap::new();
+    // Auth Token
     let auth = format!("token {}", &config.api_key).to_string();
+
+    // Headers
+    let mut headers = HeaderMap::new();
     headers.insert(AUTHORIZATION, HeaderValue::from_str(&auth).unwrap());
     headers.insert(
         "Accept",
@@ -29,27 +32,19 @@ async fn execute(
     headers.insert("Content-Type", HeaderValue::from_static("application/json"));
     headers.insert("User-Agent", HeaderValue::from_static("gitify"));
 
+    // Client
     let mut client = reqwest::Client::builder()
         .default_headers(headers)
         .build()?;
 
+    // DoIt
     create_repo(&mut client, settings).await?;
-
-    // let repos = "https://api.github.com/user/repos".to_string();
-    // let base = "https://api.github.com/users/florianfelix/repos".to_string();
-    // let zen = "https://api.github.com/zen".to_string();
-
-    // getgit(&mut client, repos).await?;
-    // getgit(&mut client, zen).await?;
-
     Ok(())
 }
 
 fn main() {
     let working_dir = std::env::current_dir().unwrap();
-    // println!("Working dir:\n{:?}", &working_dir);
-
-    let confname = "gitify.conf";
+    let confname = "gitify";
     let mut config: GitifyConfig = confy::load(confname).unwrap();
     let mut settings = CreateSettings::new(working_dir, true);
 
@@ -69,11 +64,11 @@ fn main() {
             Arg::new("public")
                 .short('p')
                 .long("public")
-                // .value_name("PUBLIC")
                 .about("Create a public repository"),
         )
         .get_matches();
 
+    // Store Token in config
     if let Some(t) = matches.value_of("token") {
         config.api_key = t.to_string();
         confy::store(confname, &config).unwrap();
@@ -84,6 +79,7 @@ fn main() {
         return;
     }
 
+    // Ask for token and store in config if empty
     if config.api_key.is_empty() {
         let s = utils::read_input();
         config.api_key = s;
@@ -95,11 +91,11 @@ fn main() {
         return;
     }
 
+    // Settings: set public
     if matches.is_present("public") {
         settings.private = false;
     }
 
-    // println!("{:?}", &config);
-    // println!("{:?}", &settings);
+    // DoIt
     execute(config, settings).unwrap();
 }
