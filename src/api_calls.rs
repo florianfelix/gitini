@@ -14,7 +14,8 @@ pub async fn create_repo(
     client: &mut reqwest::Client,
     settings: CreateSettings,
 ) -> Result<(), Box<dyn std::error::Error>> {
-    let nr = NewRepoComplete::new("TEST", settings.private);
+    let name = settings.working_dir.file_name().unwrap().to_str().unwrap();
+    let nr = NewRepoComplete::new(name, settings.private);
     let url = "https://api.github.com/user/repos".to_string();
     let res = client.post(url).json(&nr).send().await?;
     println!("\n\nResponse:\n{:#?}", res.text().await.unwrap());
