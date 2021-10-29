@@ -6,5 +6,5 @@ Create repository on Github and create and upload the current folder
 
 ## Usage
 - get token from <a href="https://github.com/settings/tokens">Github</a> with repo permissions
-- run once or `gitify -t TOKEN` to setup
+- run once or `gitify -t TOKEN` to setup new access token
 - run gitify in folder to create github repo and upload
