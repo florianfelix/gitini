@@ -16,6 +16,7 @@ USAGE:
 
 OPTIONS:
 
+    -c, --complete         init, commit and push everything
     -h, --help             Print help information
     -p, --public           Create a public repository
     -t, --token <TOKEN>    Store the Github API Token
