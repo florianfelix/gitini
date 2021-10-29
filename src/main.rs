@@ -15,7 +15,10 @@ use create_settings::CreateSettings;
 use gconfig::GitifyConfig;
 
 #[tokio::main]
-async fn execute(config: GitifyConfig) -> Result<(), Box<dyn std::error::Error>> {
+async fn execute(
+    config: GitifyConfig,
+    settings: CreateSettings,
+) -> Result<(), Box<dyn std::error::Error>> {
     let mut headers = HeaderMap::new();
     let auth = format!("token {}", &config.api_key).to_string();
     headers.insert(AUTHORIZATION, HeaderValue::from_str(&auth).unwrap());
@@ -43,9 +46,14 @@ async fn execute(config: GitifyConfig) -> Result<(), Box<dyn std::error::Error>>
 }
 
 fn main() {
+    let working_dir = std::env::current_dir().unwrap();
+    println!("Working dir:\n{:?}", &working_dir);
+
     let confname = "gitify.conf";
     let mut config: GitifyConfig = confy::load(confname).unwrap();
     println!("{:?}", &config);
+
+    let mut settings = CreateSettings::new(working_dir, true);
 
     let matches = App::new("Gitify")
         .version("0.1")
@@ -58,6 +66,13 @@ fn main() {
                 .value_name("TOKEN")
                 .about("Store the Github API Token")
                 .takes_value(true),
+        )
+        .arg(
+            Arg::new("public")
+                .short('p')
+                .long("public")
+                // .value_name("PUBLIC")
+                .about("Create a public repository"),
         )
         .get_matches();
 
@@ -82,8 +97,9 @@ fn main() {
         return;
     }
 
-    let working_dir = std::env::current_dir().unwrap();
-    println!("{:?}", &working_dir);
+    if matches.is_present("public") {
+        settings.private = false;
+    }
 
-    execute(config).unwrap();
+    execute(config, settings).unwrap();
 }

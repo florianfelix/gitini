@@ -1,8 +1,8 @@
 use std::path::PathBuf;
 
 pub struct CreateSettings {
-    working_dir: PathBuf,
-    private: bool,
+    pub working_dir: PathBuf,
+    pub private: bool,
 }
 
 impl CreateSettings {
