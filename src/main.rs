@@ -81,7 +81,7 @@ fn main() {
             Arg::new("complete")
                 .short('c')
                 .long("complete")
-                .about("init, commit and push everything"),
+                .about("Init, commit and push everything"),
         )
         .get_matches();
 
