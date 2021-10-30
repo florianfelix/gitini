@@ -1,5 +1,5 @@
-use crate::create_settings::CreateSettings;
 use crate::newrepo::{CreatedRepo, NewRepoComplete};
+use crate::runtime_settings::RuntimeSettings;
 use reqwest::Client;
 
 use std::process::Command;
@@ -15,7 +15,7 @@ pub async fn getgit(client: &mut Client, url: String) -> Result<(), Box<dyn std:
 
 pub async fn create_repo(
     client: &mut reqwest::Client,
-    settings: CreateSettings,
+    settings: RuntimeSettings,
 ) -> Result<(), Box<dyn std::error::Error>> {
     // Post Body
     let nr = NewRepoComplete::new(&settings.repo_name, settings.private);
@@ -52,9 +52,9 @@ pub async fn create_repo(
 
         if settings.complete {
             newrepo.push_all();
-            return Ok(())
+            return Ok(());
         }
-        
+
         newrepo.base_case();
     }
 

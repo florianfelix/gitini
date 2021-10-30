@@ -6,18 +6,18 @@ use clap::{App, Arg};
 use reqwest::header::{HeaderMap, HeaderValue, AUTHORIZATION};
 
 mod api_calls;
-mod create_settings;
-mod gconfig;
+mod config_settings;
 mod newrepo;
+mod runtime_settings;
 mod utils;
 use api_calls::{create_repo, getgit};
-use create_settings::CreateSettings;
-use gconfig::GitifyConfig;
+use config_settings::ConfigSettings;
+use runtime_settings::RuntimeSettings;
 
 #[tokio::main]
 async fn execute(
-    config: GitifyConfig,
-    settings: CreateSettings,
+    config: ConfigSettings,
+    settings: RuntimeSettings,
 ) -> Result<(), Box<dyn std::error::Error>> {
     // Auth Token
     let auth = format!("token {}", &config.api_key).to_string();
@@ -52,11 +52,11 @@ fn main() {
         .map(String::from)
         .unwrap(); // Is this truly the best way?
 
-    let mut settings = CreateSettings::new(working_dir.unwrap(), repo_name, true);
+    let mut settings = RuntimeSettings::new(working_dir.unwrap(), repo_name, true);
 
     // Load - Create Config
     let confname = "gitify";
-    let mut config: GitifyConfig = confy::load(confname).unwrap();
+    let mut config: ConfigSettings = confy::load(confname).unwrap();
 
     // ARGUMENTS
     let matches = App::new("Gitify")

@@ -2,7 +2,7 @@ use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
 use std::process::Command;
 
-use crate::create_settings::CreateSettings;
+use crate::runtime_settings::RuntimeSettings;
 use crate::utils::touch;
 
 #[derive(Serialize, Deserialize, Debug)]
