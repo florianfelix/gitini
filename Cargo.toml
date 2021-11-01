@@ -1,5 +1,10 @@
 [package]
 name = "gitify"
+authors = ["florianfelix"]
+description = "Create repository on Github and upload the current folder"
+homepage = "https://github.com/florianfelix/gitify"
+repository = "https://github.com/florianfelix/gitify"
+license = "MIT OR Apache-2.0"
 version = "0.2.0"
 edition = "2021"
 
