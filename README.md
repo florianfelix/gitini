@@ -17,8 +17,9 @@ USAGE:
 
 OPTIONS:
 
-    -c, --complete         init, commit and push everything
+    -c, --complete         Init, commit and push everything
     -h, --help             Print help information
+    -n, --no_browser       Do not open the repository in browser
     -p, --public           Create a public repository
     -t, --token <TOKEN>    Store the Github API Token
     -V, --version          Print version information
