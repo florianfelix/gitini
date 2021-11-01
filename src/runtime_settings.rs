@@ -6,6 +6,7 @@ pub struct RuntimeSettings {
     pub repo_name: String,
     pub private: bool,
     pub complete: bool,
+    pub open_website: bool,
 }
 
 impl RuntimeSettings {
@@ -15,6 +16,7 @@ impl RuntimeSettings {
             repo_name: repo_name,
             private: private,
             complete: false,
+            open_website: true,
         }
     }
 }

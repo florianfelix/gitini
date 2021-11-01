@@ -45,17 +45,23 @@ pub async fn create_repo(
     if status == 201 {
         println!("SUCCESS. Repository created");
         let ssh_url: String = content["ssh_url"].as_str().unwrap().into();
-        let newrepo: CreatedRepo = CreatedRepo::new().set_ssh_url(ssh_url);
+        let html_url: String = content["html_url"].as_str().unwrap().into();
+        let newrepo: CreatedRepo = CreatedRepo::new()
+            .set_ssh_url(ssh_url)
+            .set_html_url(html_url);
 
         newrepo.check_gitignore(settings.working_dir.clone());
         newrepo.check_readme(settings.working_dir.clone());
 
         if settings.complete {
             newrepo.push_all();
-            return Ok(());
+        } else {
+            newrepo.base_case();
         }
 
-        newrepo.base_case();
+        if settings.open_website {
+            newrepo.open_in_browser();
+        }
     }
 
     Ok(())

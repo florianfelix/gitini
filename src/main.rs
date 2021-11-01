@@ -83,6 +83,12 @@ fn main() {
                 .long("complete")
                 .about("Init, commit and push everything"),
         )
+        .arg(
+            Arg::new("no_browser")
+                .short('n')
+                .long("no_browser")
+                .about("Do not open the repository in browser"),
+        )
         .get_matches();
 
     // TEST ARGUMENTS
@@ -115,6 +121,9 @@ fn main() {
     }
     if matches.is_present("complete") {
         settings.complete = true;
+    }
+    if matches.is_present("no_browser") {
+        settings.open_website = false;
     }
 
     // DoIt

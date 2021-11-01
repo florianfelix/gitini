@@ -55,14 +55,22 @@ impl NewRepoComplete {
 #[derive(Debug)]
 pub struct CreatedRepo {
     pub ssh_url: String,
+    pub html_url: String,
 }
 
 impl CreatedRepo {
     pub fn new() -> Self {
-        Self { ssh_url: "".into() }
+        Self {
+            ssh_url: "".into(),
+            html_url: "".into(),
+        }
     }
     pub fn set_ssh_url(mut self, ssh_url: String) -> Self {
         self.ssh_url = ssh_url;
+        self
+    }
+    pub fn set_html_url(mut self, html_url: String) -> Self {
+        self.html_url = html_url;
         self
     }
     pub fn check_gitignore(&self, mut ignore_path: PathBuf) {
@@ -72,6 +80,16 @@ impl CreatedRepo {
     pub fn check_readme(&self, mut readme_path: PathBuf) {
         readme_path.push("README.md");
         touch(readme_path.as_path()).unwrap();
+    }
+    pub fn open_in_browser(&self) {
+        let path = &self.html_url;
+        match open::that(path) {
+            Ok(()) => println!("Opened '{}' successfully.", path),
+            Err(err) => eprintln!(
+                "An error occurred when opening '{}': {}",
+                &self.html_url, err
+            ),
+        }
     }
     pub fn base_case(&self) {
         Command::new("git")
