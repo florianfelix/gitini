@@ -60,7 +60,7 @@ fn main() {
 
     // ARGUMENTS
     let matches = App::new("Gitify")
-        .version("0.1")
+        .version("0.2")
         .author("Florian Felix M. <florianfelixmeyer@gmail.com>")
         .about("Gitify this Folder")
         .arg(
