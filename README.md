@@ -1,19 +1,19 @@
-# gitify
+# gitini
 Create repository on Github and upload the current folder
 ## Install
 - have rust <a href="https://www.rust-lang.org/tools/install">installed</a>
-- `cargo install --locked --git https://github.com/florianfelix/gitify`
+- `cargo install --locked --git https://github.com/florianfelix/gitini`
 
 ## Usage
 - <a href="https://github.com/settings/tokens">get token</a> from Github with repo permissions
-- run once or `gitify -t TOKEN` to setup new access token
-- run `gitify` in folder to create github repo and upload [.gitignore and README.md]
-- run `gitify -c` to create and upload everything (possible empty gitignore! Danger!)
+- run once or `gitini -t TOKEN` to setup new access token
+- run `gitini` in folder to create github repo and upload [.gitignore and README.md]
+- run `gitini -c` to create and upload everything (possible empty gitignore! Danger!)
 
 ## Help Message
 USAGE:
 
-    gitify [OPTIONS]
+    gitini [OPTIONS]
 
 OPTIONS:
 

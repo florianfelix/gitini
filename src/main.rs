@@ -30,7 +30,7 @@ async fn execute(
         HeaderValue::from_static("application/vnd.github.v3+json"),
     );
     headers.insert("Content-Type", HeaderValue::from_static("application/json"));
-    headers.insert("User-Agent", HeaderValue::from_static("gitify"));
+    headers.insert("User-Agent", HeaderValue::from_static("gitini"));
 
     // Client
     let mut client = reqwest::Client::builder()
@@ -55,14 +55,14 @@ fn main() {
     let mut settings = RuntimeSettings::new(working_dir.unwrap(), repo_name, true);
 
     // Load - Create Config
-    let confname = "gitify";
+    let confname = "gitini";
     let mut config: ConfigSettings = confy::load(confname).unwrap();
 
     // ARGUMENTS
-    let matches = App::new("Gitify")
-        .version("0.2")
+    let matches = App::new("gitini")
+        .version("0.3")
         .author("Florian Felix M. <florianfelixmeyer@gmail.com>")
-        .about("Gitify this Folder")
+        .about("gitini this Folder")
         .arg(
             Arg::new("token")
                 .short('t')
@@ -97,7 +97,7 @@ fn main() {
         config.api_key = t.to_string();
         confy::store(confname, &config).unwrap();
         println!(
-            "Stored Token {:?}\n You can now use gitify!",
+            "Stored Token {:?}\n You can now use gitini!",
             &config.api_key
         );
         return;
@@ -109,7 +109,7 @@ fn main() {
         config.api_key = s;
         confy::store(confname, &config).unwrap();
         println!(
-            "Stored Token {:?}\n You can now use gitify!",
+            "Stored Token {:?}\n You can now use gitini!",
             &config.api_key
         );
         return;
