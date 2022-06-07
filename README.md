@@ -10,6 +10,7 @@ Create repository on Github and upload the current folder
 - run `gitini` in folder to create github repo and upload [.gitignore and README.md]
 - run `gitini -c` to create and upload everything (possible empty gitignore! Danger!)
 
+
 ## Help Message
 USAGE:
 
