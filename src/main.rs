@@ -60,7 +60,7 @@ fn main() {
 
     // ARGUMENTS
     let matches = Command::new("gitini")
-        .version("0.3")
+        .version("0.4")
         .author("Florian Felix M. <florianfelixmeyer@gmail.com>")
         .about("gitini this Folder")
         .arg(
