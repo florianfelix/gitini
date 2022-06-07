@@ -1,3 +1,5 @@
+[![Rust](https://github.com/florianfelix/gitini/actions/workflows/rust.yml/badge.svg)](https://github.com/florianfelix/gitini/actions/workflows/rust.yml)
+
 # gitini
 Create repository on Github and upload the current folder
 ## Install
