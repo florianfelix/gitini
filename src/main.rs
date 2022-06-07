@@ -2,7 +2,7 @@
 #![allow(unused_variables)]
 #![allow(unused_imports)]
 
-use clap::{App, Arg};
+use clap::{Command, Arg};
 use reqwest::header::{HeaderMap, HeaderValue, AUTHORIZATION};
 
 mod api_calls;
@@ -59,7 +59,7 @@ fn main() {
     let mut config: ConfigSettings = confy::load(confname).unwrap();
 
     // ARGUMENTS
-    let matches = App::new("gitini")
+    let matches = Command::new("gitini")
         .version("0.3")
         .author("Florian Felix M. <florianfelixmeyer@gmail.com>")
         .about("gitini this Folder")
@@ -68,26 +68,26 @@ fn main() {
                 .short('t')
                 .long("token")
                 .value_name("TOKEN")
-                .about("Store the Github API Token")
+                .help("Store the Github API Token")
                 .takes_value(true),
         )
         .arg(
             Arg::new("public")
                 .short('p')
                 .long("public")
-                .about("Create a public repository"),
+                .help("Create a public repository"),
         )
         .arg(
             Arg::new("complete")
                 .short('c')
                 .long("complete")
-                .about("Init, commit and push everything"),
+                .help("Init, commit and push everything"),
         )
         .arg(
             Arg::new("no_browser")
                 .short('n')
                 .long("no_browser")
-                .about("Do not open the repository in browser"),
+                .help("Do not open the repository in browser"),
         )
         .get_matches();
 
