@@ -5,7 +5,7 @@ description = "Create repository on Github and upload the current folder"
 homepage = "https://github.com/florianfelix/gitini"
 repository = "https://github.com/florianfelix/gitini"
 license = "MIT OR Apache-2.0"
-version = "0.3.0"
+version = "0.4.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
